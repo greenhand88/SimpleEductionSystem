@@ -1,14 +1,17 @@
 package com.zzj.simpleeducationsysetm.controller;
 
-import com.zzj.simpleeducationsysetm.VO.*;
+import com.zzj.simpleeducationsysetm.VO.ChangePassword;
+import com.zzj.simpleeducationsysetm.VO.Login;
+import com.zzj.simpleeducationsysetm.VO.Result;
+import com.zzj.simpleeducationsysetm.VO.TokenPermission;
 import com.zzj.simpleeducationsysetm.entity.Account;
-import com.zzj.simpleeducationsysetm.service.*;
+import com.zzj.simpleeducationsysetm.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
-@RequestMapping("/account")
+@RequestMapping("api/account/")
 @Controller
 public class AccountController {
     @Autowired
@@ -63,7 +66,7 @@ public class AccountController {
      * @param tokenPermission
      * @return
      */
-    @PostMapping("/api/token")
+    @PostMapping("token")
     @ResponseBody
     public Result vertifyToken(@RequestBody TokenPermission tokenPermission) {
         return accountService.vertifyToken(tokenPermission.getToken());
@@ -74,7 +77,7 @@ public class AccountController {
      * @param tokenPermission
      * @return
      */
-    @PostMapping("/api/getAccount")
+    @PostMapping("getAccount")
     @ResponseBody
     public Result getAccount(@RequestBody TokenPermission tokenPermission) {
         return accountService.getAccountByToken(tokenPermission.getToken());
@@ -85,7 +88,7 @@ public class AccountController {
      * @param tokenPermission
      * @return
      */
-    @PostMapping("/api/getUserName")
+    @PostMapping("getUserName")
     @ResponseBody
     public Result getUserName(@RequestBody TokenPermission tokenPermission) {
         return accountService.getUserNameByToken(tokenPermission.getToken());
@@ -97,7 +100,7 @@ public class AccountController {
      * @param tokenPermission
      * @return
      */
-    @PostMapping("/api/signOut")
+    @PostMapping("signOut")
     @ResponseBody
     public Result signOut(@RequestBody TokenPermission tokenPermission) {
         return accountService.signOut(tokenPermission.getToken());

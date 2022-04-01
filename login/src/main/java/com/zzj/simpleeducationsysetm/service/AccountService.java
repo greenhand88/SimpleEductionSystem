@@ -1,14 +1,13 @@
 package com.zzj.simpleeducationsysetm.service;
 
 import com.zzj.simpleeducationsysetm.VO.Result;
-import com.zzj.simpleeducationsysetm.dao.Mappers.AccountMapper;
+import com.zzj.simpleeducationsysetm.mappers.AccountMapper;
 import com.zzj.simpleeducationsysetm.tools.Token;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.SQLOutput;
 import java.util.concurrent.TimeUnit;
 
 @Service
