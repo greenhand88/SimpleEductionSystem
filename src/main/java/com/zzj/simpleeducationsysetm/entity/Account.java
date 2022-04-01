@@ -1,4 +1,4 @@
-package com.example.blog.entity;
+package com.zzj.simpleeducationsysetm.entity;
 
 import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;

@@ -1,11 +1,8 @@
-package com.example.blog.controller;
+package com.zzj.simpleeducationsysetm.controller;
 
-import com.example.blog.VO.ChangePassword;
-import com.example.blog.VO.Login;
-import com.example.blog.VO.Result;
-import com.example.blog.VO.TokenPermission;
-import com.example.blog.entity.Account;
-import com.example.blog.service.AccountService;
+import com.zzj.simpleeducationsysetm.VO.*;
+import com.zzj.simpleeducationsysetm.entity.Account;
+import com.zzj.simpleeducationsysetm.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

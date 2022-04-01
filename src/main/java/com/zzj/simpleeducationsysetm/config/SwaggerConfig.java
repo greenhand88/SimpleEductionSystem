@@ -1,4 +1,4 @@
-package com.zzj.config;
+package com.zzj.simpleeducationsysetm.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +24,7 @@ public class SwaggerConfig {
                 //.enable("dev".equals(active))  // 仅在开发环境开启Swagger
                 .enable(true)//默认一直开启
                 .apiInfo(apiInfo())
-                .host("http://localhost:10086/")  // Base URL
+                .host("http://localhost:18000/")  // Base URL
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.example.blog.controller"))
                 .paths(PathSelectors.any())

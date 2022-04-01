@@ -1,4 +1,4 @@
-package com.example.blog.VO;
+package com.zzj.simpleeducationsysetm.VO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

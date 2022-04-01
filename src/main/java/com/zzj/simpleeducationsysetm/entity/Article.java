@@ -1,16 +1,18 @@
-package com.example.blog.entity;
+package com.zzj.simpleeducationsysetm.entity;
 
 import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @ApiModel
-public class Blog {
-    String account;
-    List<String> articles;
+public class Article {
+    String id;
+    String author;
+    String title;
+    Date uploadTime;
 }

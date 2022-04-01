@@ -1,13 +1,10 @@
-package com.example.blog.service;
+package com.zzj.simpleeducationsysetm.service;
 
-import com.example.blog.VO.Result;
-import com.example.blog.dao.Mappers.AccountMapper;
-import com.example.blog.tools.Token;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zzj.simpleeducationsysetm.VO.Result;
+import com.zzj.simpleeducationsysetm.dao.Mappers.AccountMapper;
+import com.zzj.simpleeducationsysetm.tools.Token;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

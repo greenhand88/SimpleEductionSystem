@@ -1,4 +1,4 @@
-package com.example.blog.tools;
+package com.zzj.simpleeducationsysetm.tools;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
