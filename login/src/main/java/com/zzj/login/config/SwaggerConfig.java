@@ -1,4 +1,4 @@
-package com.zzj.simpleeducationsysetm.config;
+package com.zzj.login.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

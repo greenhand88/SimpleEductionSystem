@@ -1,11 +1,11 @@
-package com.zzj.simpleeducationsysetm.controller;
+package com.zzj.login.controller;
 
-import com.zzj.simpleeducationsysetm.VO.ChangePassword;
-import com.zzj.simpleeducationsysetm.VO.Login;
-import com.zzj.simpleeducationsysetm.VO.Result;
-import com.zzj.simpleeducationsysetm.VO.TokenPermission;
-import com.zzj.simpleeducationsysetm.entity.Account;
-import com.zzj.simpleeducationsysetm.service.AccountService;
+import com.zzj.login.VO.ChangePassword;
+import com.zzj.login.VO.Login;
+import com.zzj.login.VO.Result;
+import com.zzj.login.VO.TokenPermission;
+import com.zzj.login.entity.Account;
+import com.zzj.login.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

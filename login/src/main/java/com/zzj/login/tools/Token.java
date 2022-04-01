@@ -1,4 +1,4 @@
-package com.zzj.simpleeducationsysetm.tools;
+package com.zzj.login.tools;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;

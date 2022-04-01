@@ -1,4 +1,4 @@
-package com.zzj.simpleeducationsysetm.mappers;
+package com.zzj.login.mappers;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;

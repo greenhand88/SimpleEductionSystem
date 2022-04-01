@@ -1,8 +1,8 @@
-package com.zzj.simpleeducationsysetm.service;
+package com.zzj.login.service;
 
-import com.zzj.simpleeducationsysetm.VO.Result;
-import com.zzj.simpleeducationsysetm.mappers.AccountMapper;
-import com.zzj.simpleeducationsysetm.tools.Token;
+import com.zzj.login.VO.Result;
+import com.zzj.login.mappers.AccountMapper;
+import com.zzj.login.tools.Token;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;

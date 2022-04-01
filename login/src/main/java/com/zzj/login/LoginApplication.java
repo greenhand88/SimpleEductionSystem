@@ -1,4 +1,4 @@
-package com.zzj.simpleeducationsysetm;
+package com.zzj.login;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
