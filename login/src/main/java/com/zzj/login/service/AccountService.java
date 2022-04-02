@@ -25,7 +25,7 @@ public class AccountService {
     public Result isPass(String account, String password) throws Exception {
         String s = accountMapper.getPassword(account);
         if (password.equals(s)) {
-            String userName = accountMapper.getUserName(account);
+            String userName = accountMapper.getUid(account);
             String token = Token.getToken(account, userName);
             redisTemplate.opsForValue().set(token, account, 60 * 30, TimeUnit.SECONDS);
             return new Result(token, "200", true, "登录成功!");
@@ -39,9 +39,9 @@ public class AccountService {
      * @return isSucceed
      */
     @Transactional
-    public Result registerAccount(String account, String password, String userName) throws Exception {
-        if (accountMapper.getUserName(account) == null || accountMapper.getUserName(account) == "")
-            accountMapper.register(account, password, userName);
+    public Result registerStudentAccount(String account, String password, String uid,String name) throws Exception {
+        if (accountMapper.getUid(account) == null || accountMapper.getUid(account) == "")
+            accountMapper.register(account, password, uid,name);
         else
             return new Result("", "360", false, "账号已存在!请重新注册!");
         return new Result("", "200", false, "注册成功!");
@@ -97,7 +97,7 @@ public class AccountService {
 //        System.out.println( redisTemplate.opsForValue().get(token));
         if(token==null)
             return new Result(token, "350", false, "令牌失效,请重新登录!");
-        return new Result(token,"200",true,accountMapper.getUserName((String)redisTemplate.opsForValue().get(token)));
+        return new Result(token,"200",true,accountMapper.getUid((String)redisTemplate.opsForValue().get(token)));
     }
 
     /**

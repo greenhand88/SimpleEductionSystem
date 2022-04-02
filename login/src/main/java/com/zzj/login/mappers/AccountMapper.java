@@ -11,7 +11,7 @@ public interface AccountMapper {
      * @param account
      * @return password
      */
-    @Select("select password from account where account=#{account}")
+    @Select("select password from student where account=#{account}")
     public String getPassword(String account);
 
     /**
@@ -20,8 +20,8 @@ public interface AccountMapper {
      * @param account
      * @return userName
      */
-    @Select("select userName from account where account=#{account}")
-    public String getUserName(String account);
+    @Select("select uid from student where account=#{account}")
+    public String getUid(String account);
 
     /**
      * register
@@ -29,8 +29,8 @@ public interface AccountMapper {
      * @param account
      * @param password
      */
-    @Insert("insert into account(account,password,userName) values(#{account},#{password},#{userName})")
-    public void register(String account, String password, String userName);
+    @Insert("insert into student(uid,name,account,password) values(#{uid},#{name},#{account},#{password})")
+    public void register(String account, String password, String uid,String name);
 
     /**
      * changePassword
@@ -38,7 +38,7 @@ public interface AccountMapper {
      * @param account
      * @param password
      */
-    @Update("update account set password ={#newPassword} where account=#{account}")
+    @Update("update student set password ={#newPassword} where account=#{account}")
     public void changePassword(String account, String password);
 
 
