@@ -5,6 +5,9 @@
     <packaging>pom</packaging>
     <modules>
         <module>eureka</module>
+        <module>login</module>
+        <module>homework</module>
+        <module>gateway</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -17,6 +20,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>SimpleEducationSysetm</name>
     <description>SimpleEducationSysetm</description>
+
     <properties>
         <java.version>11</java.version>
     </properties>
