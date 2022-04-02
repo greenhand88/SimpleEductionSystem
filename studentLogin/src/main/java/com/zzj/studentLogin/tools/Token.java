@@ -1,4 +1,4 @@
-package com.zzj.login.tools;
+package com.zzj.studentLogin.tools;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;

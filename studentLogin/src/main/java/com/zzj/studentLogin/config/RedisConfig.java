@@ -1,4 +1,4 @@
-package com.zzj.login.config;
+package com.zzj.studentLogin.config;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,4 +1,4 @@
-package com.zzj.login.mappers;
+package com.zzj.studentLogin.mappers;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;

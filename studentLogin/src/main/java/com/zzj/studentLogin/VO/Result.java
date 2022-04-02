@@ -1,4 +1,4 @@
-package com.zzj.login.VO;
+package com.zzj.studentLogin.VO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

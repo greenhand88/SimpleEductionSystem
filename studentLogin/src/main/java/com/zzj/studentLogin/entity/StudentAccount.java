@@ -1,4 +1,4 @@
-package com.zzj.login.entity;
+package com.zzj.studentLogin.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

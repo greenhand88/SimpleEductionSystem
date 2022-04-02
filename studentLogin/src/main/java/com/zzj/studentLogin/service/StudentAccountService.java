@@ -1,8 +1,8 @@
-package com.zzj.login.service;
+package com.zzj.studentLogin.service;
 
-import com.zzj.login.VO.Result;
-import com.zzj.login.mappers.StudentAccountMapper;
-import com.zzj.login.tools.Token;
+import com.zzj.studentLogin.VO.Result;
+import com.zzj.studentLogin.mappers.StudentAccountMapper;
+import com.zzj.studentLogin.tools.Token;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;

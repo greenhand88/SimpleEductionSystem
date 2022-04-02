@@ -1,11 +1,10 @@
-package com.zzj.login;
-
-import com.zzj.login.VO.ChangePassword;
-import com.zzj.login.VO.Login;
-import com.zzj.login.VO.Result;
-import com.zzj.login.VO.TokenPermission;
-import com.zzj.login.entity.StudentAccount;
-import com.zzj.login.service.StudentAccountService;
+package com.zzj.studentLogin;
+import com.zzj.studentLogin.VO.ChangePassword;
+import com.zzj.studentLogin.VO.Login;
+import com.zzj.studentLogin.VO.Result;
+import com.zzj.studentLogin.VO.TokenPermission;
+import com.zzj.studentLogin.entity.StudentAccount;
+import com.zzj.studentLogin.service.StudentAccountService;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -19,7 +18,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableEurekaClient
 @CrossOrigin
-@MapperScan("com.zzj.login.mappers")
+@MapperScan("com.zzj.studentLogin.mappers")
 @RestController
 public class LoginApplication {
     @Autowired

@@ -1,4 +1,4 @@
-package com.zzj.login.config;
+package com.zzj.studentLogin.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
