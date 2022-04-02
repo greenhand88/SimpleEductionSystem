@@ -5,7 +5,7 @@ import com.zzj.login.VO.Login;
 import com.zzj.login.VO.Result;
 import com.zzj.login.VO.TokenPermission;
 import com.zzj.login.entity.StudentAccount;
-import com.zzj.login.service.AccountService;
+import com.zzj.login.service.StudentAccountService;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -23,7 +23,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @RestController
 public class LoginApplication {
     @Autowired
-    AccountService accountService;
+    StudentAccountService studentAccountService;
     /**
      * @param login
      * @return token
@@ -31,7 +31,7 @@ public class LoginApplication {
     @PostMapping("/login")
     public Result isPass(@RequestBody Login login) {
         try {
-            return accountService.isPass(login.getAccount(), login.getPassword());
+            return studentAccountService.isPass(login.getAccount(), login.getPassword());
         } catch (Exception e) {
             e.printStackTrace();
             return new Result(new String(), "404", false, "Exception!");
@@ -43,10 +43,10 @@ public class LoginApplication {
      * @param studentAccount
      * @return
      */
-    @PostMapping("/studnetRegister")
+    @PostMapping("/register")
     public Result registerAccount(@RequestBody StudentAccount studentAccount) {
         try {
-            return accountService.registerStudentAccount(studentAccount.getAccount(), studentAccount.getPassword(),studentAccount.getUid(),studentAccount.getName());
+            return studentAccountService.registerStudentAccount(studentAccount.getAccount(), studentAccount.getPassword(),studentAccount.getUid(),studentAccount.getName());
         } catch (Exception e) {
             e.printStackTrace();
             return new Result("", "420", false, "账号已存在!请重新注册!");
@@ -60,7 +60,7 @@ public class LoginApplication {
     @PostMapping("/changePassword")
     public Result changePassword(@RequestBody ChangePassword changePassword) {
         try {
-            return accountService.changePassword(changePassword.getAccount(), changePassword.getOldPassword(), changePassword.getNewPassword());
+            return studentAccountService.changePassword(changePassword.getAccount(), changePassword.getOldPassword(), changePassword.getNewPassword());
         } catch (Exception e) {
             e.printStackTrace();
             return new Result("", "404", false, "连接断开,密码修改失败!");
@@ -73,7 +73,7 @@ public class LoginApplication {
      */
     @PostMapping("/token")
     public Result vertifyToken(@RequestBody TokenPermission tokenPermission) {
-        return accountService.vertifyToken(tokenPermission.getToken());
+        return studentAccountService.vertifyToken(tokenPermission.getToken());
     }
 
     /**
@@ -83,7 +83,7 @@ public class LoginApplication {
      */
     @PostMapping("/getAccount")
     public Result getAccount(@RequestBody TokenPermission tokenPermission) {
-        return accountService.getAccountByToken(tokenPermission.getToken());
+        return studentAccountService.getAccountByToken(tokenPermission.getToken());
     }
 
     /**
@@ -93,7 +93,7 @@ public class LoginApplication {
      */
     @PostMapping("/getUserName")
     public Result getUserName(@RequestBody TokenPermission tokenPermission) {
-        return accountService.getUserNameByToken(tokenPermission.getToken());
+        return studentAccountService.getUserNameByToken(tokenPermission.getToken());
     }
 
     /**
@@ -104,7 +104,7 @@ public class LoginApplication {
      */
     @PostMapping("/signOut")
     public Result signOut(@RequestBody TokenPermission tokenPermission) {
-        return accountService.signOut(tokenPermission.getToken());
+        return studentAccountService.signOut(tokenPermission.getToken());
     }
 
     public static void main(String[] args) {

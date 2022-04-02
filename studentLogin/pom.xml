@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.zzj</groupId>
-    <artifactId>login</artifactId>
+    <artifactId>studentLogin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>login</name>
-    <description>login</description>
+    <name>studentLogin</name>
+    <description>studentLogin</description>
     <properties>
         <java.version>11</java.version>
     </properties>

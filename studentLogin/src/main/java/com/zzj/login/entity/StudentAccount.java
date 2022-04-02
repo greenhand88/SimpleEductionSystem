@@ -1,15 +1,15 @@
 package com.zzj.login.entity;
 
-import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@ApiModel
-public class Account {
+@AllArgsConstructor
+public class StudentAccount{
     String account;
     String password;
+    String uid;
+    String name;
 }

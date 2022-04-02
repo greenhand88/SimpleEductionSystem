@@ -5,7 +5,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>eureka</module>
-        <module>login</module>
+        <module>studentLogin</module>
         <module>homework</module>
         <module>gateway</module>
     </modules>
