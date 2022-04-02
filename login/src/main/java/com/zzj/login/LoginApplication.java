@@ -11,7 +11,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableEurekaClient
-@RestController
 @MapperScan("com.zzj.login.mappers")
 public class LoginApplication {
     public static void main(String[] args) {
