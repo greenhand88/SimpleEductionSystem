@@ -34,6 +34,16 @@ public class StudentAccountService {
     }
 
     /**
+     * 获取学号
+     * @param account
+     * @return
+     */
+    public String getUid(String account){
+        System.out.println(studentAccountMapper.getUid(account));
+        return studentAccountMapper.getUid(account);
+    }
+
+    /**
      * @param account
      * @param password
      * @return isSucceed

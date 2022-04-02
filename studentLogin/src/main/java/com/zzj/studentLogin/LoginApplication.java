@@ -65,6 +65,10 @@ public class LoginApplication {
             return new Result("", "404", false, "连接断开,密码修改失败!");
         }
     }
+    @PostMapping("/getUid")
+    public String getUid(String account){
+        return studentAccountService.getUid(account);
+    }
 
     /**
      * @param tokenPermission
