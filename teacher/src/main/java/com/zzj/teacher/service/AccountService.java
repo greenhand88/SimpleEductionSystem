@@ -1,8 +1,8 @@
-package com.zzj.studentLogin.service;
+package com.zzj.teacher.service;
 
-import com.zzj.studentLogin.VO.Result;
-import com.zzj.studentLogin.mappers.StudentAccountMapper;
-import com.zzj.studentLogin.tools.Token;
+import com.zzj.teacher.VO.Result;
+import com.zzj.teacher.mappers.AccountMapper;
+import com.zzj.teacher.tools.Token;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -11,11 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.concurrent.TimeUnit;
 
 @Service
-public class StudentAccountService {
+public class AccountService {
     @Autowired
     private RedisTemplate<String,Object> redisTemplate;
     @Autowired
-    private StudentAccountMapper studentAccountMapper;
+    private AccountMapper accountMapper;
 
     /**
      * @param account
@@ -23,9 +23,9 @@ public class StudentAccountService {
      * @return token
      */
     public Result isPass(String account, String password) throws Exception {
-        String s = studentAccountMapper.getPassword(account);
+        String s = accountMapper.getPassword(account);
         if (password.equals(s)) {
-            String userName = studentAccountMapper.getUid(account);
+            String userName = accountMapper.getUid(account);
             String token = Token.getToken(account, userName);
             redisTemplate.opsForValue().set(token, account, 60 * 30, TimeUnit.SECONDS);
             return new Result(token, "200", true, "登录成功!");
@@ -39,7 +39,7 @@ public class StudentAccountService {
      * @return
      */
     public String getUid(String account){
-        return studentAccountMapper.getUid(account);
+        return accountMapper.getUid(account);
     }
 
     /**
@@ -48,8 +48,8 @@ public class StudentAccountService {
      * @return isSucceed
      */
     public Result registerStudentAccount(String account, String password, String uid,String name) throws Exception {
-        if (studentAccountMapper.getUid(account) == null || studentAccountMapper.getUid(account) == "")
-            studentAccountMapper.register(account, password, uid,name);
+        if (accountMapper.getUid(account) == null || accountMapper.getUid(account) == "")
+            accountMapper.register(account, password, uid,name);
         else
             return new Result("", "505", false, "账号已存在!请重新注册!");
         return new Result("", "200", false, "注册成功!");
@@ -62,8 +62,8 @@ public class StudentAccountService {
      */
     @Transactional
     public Result changePassword(String account, String oldPassword, String newPassword) {
-        if (studentAccountMapper.getPassword(account).equals(oldPassword))
-            studentAccountMapper.changePassword(account, newPassword);
+        if (accountMapper.getPassword(account).equals(oldPassword))
+            accountMapper.changePassword(account, newPassword);
         else
             return new Result("", "415", false, "旧密码不正确,修改失败,请重新输入!");
         return new Result("", "200", false, "密码修改成功!");
@@ -105,7 +105,7 @@ public class StudentAccountService {
 //        System.out.println( redisTemplate.opsForValue().get(token));
         if(token==null)
             return new Result(token, "350", false, "令牌失效,请重新登录!");
-        return new Result(token,"200",true,studentAccountMapper.getUid((String)redisTemplate.opsForValue().get(token)));
+        return new Result(token,"200",true, accountMapper.getUid((String)redisTemplate.opsForValue().get(token)));
     }
 
     /**

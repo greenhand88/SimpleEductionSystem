@@ -33,7 +33,7 @@ public class LoginApplication {
             return studentAccountService.isPass(login.getAccount(), login.getPassword());
         } catch (Exception e) {
             e.printStackTrace();
-            return new Result(new String(), "404", false, "Exception!");
+            return new Result(new String(), "500", false, "Exception!");
         }
     }
 

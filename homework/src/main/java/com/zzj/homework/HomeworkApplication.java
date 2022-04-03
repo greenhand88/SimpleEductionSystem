@@ -1,10 +1,12 @@
 package com.zzj.homework;
 
 import com.zzj.homework.service.UploadHW;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +19,7 @@ import javax.servlet.ServletOutputStream;
 @EnableEurekaClient
 @RestController
 @SpringBootApplication
+@MapperScan("com.zzj.homework.mappers")
 public class HomeworkApplication {
     @Autowired
     UploadHW uploadHW;
