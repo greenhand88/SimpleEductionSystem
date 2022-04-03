@@ -23,14 +23,14 @@ import java.util.UUID;
 public class UploadHW {
     @Autowired
     private LoadBalancerClient loadBalancerClient;
-
-    public String getUid(Object account){
-        RestTemplate restTemplate = new RestTemplate();
+    @Autowired
+    private RestTemplate restTemplate;
+    public String getUid(String account){
         ServiceInstance serviceInstance = loadBalancerClient.choose("STUDENT"); //从Eureka服务器中找到该服务的地址等信息。
         String response = restTemplate.postForObject("http://"+serviceInstance.getHost()+":"+serviceInstance.getPort()+"/getUid",account,String.class);
         return response;
     }
-    public String getSavePath(Object account) {
+    public String getSavePath(String account) {
         // 这里需要注意的是ApplicationHome是属于SpringBoot的类
         // 获取项目下resources/static/img路径
         ApplicationHome applicationHome = new ApplicationHome(this.getClass());
@@ -39,7 +39,7 @@ public class UploadHW {
         return applicationHome.getDir().getParentFile()
                 .getParentFile().getAbsolutePath() + "\\src\\main\\resources\\"+getUid(account)+"\\";
     }
-    public String saveFile(MultipartFile file,Object account) {
+    public String saveFile(MultipartFile file,String account) {
         if (file.isEmpty()) {
             return "文件为空!";
         }

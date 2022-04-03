@@ -66,7 +66,7 @@ public class LoginApplication {
         }
     }
     @PostMapping("/getUid")
-    public String getUid(String account){
+    public String getUid(@RequestBody String account){
         return studentAccountService.getUid(account);
     }
 

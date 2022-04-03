@@ -39,6 +39,7 @@ public class StudentAccountService {
      * @return
      */
     public String getUid(String account){
+        System.out.println(account);
         System.out.println(studentAccountMapper.getUid(account));
         return studentAccountMapper.getUid(account);
     }

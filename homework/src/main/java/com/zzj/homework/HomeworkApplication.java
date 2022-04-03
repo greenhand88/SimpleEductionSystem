@@ -21,7 +21,7 @@ public class HomeworkApplication {
     @Autowired
     UploadHW uploadHW;
     @PostMapping("/upload")
-    public String upLoadFile(@RequestParam("file") MultipartFile file,@RequestParam("account") Object account){
+    public String upLoadFile(@RequestParam("file") MultipartFile file,@RequestParam("account") String account){
         return uploadHW.saveFile(file,account);
     }
     public static void main(String[] args) {
