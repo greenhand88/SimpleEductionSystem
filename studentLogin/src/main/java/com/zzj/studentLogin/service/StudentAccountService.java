@@ -3,10 +3,14 @@ package com.zzj.studentLogin.service;
 import com.zzj.studentLogin.VO.Result;
 import com.zzj.studentLogin.mappers.StudentAccountMapper;
 import com.zzj.studentLogin.tools.Token;
+import org.springframework.amqp.rabbit.annotation.RabbitHandler;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.concurrent.TimeUnit;
 

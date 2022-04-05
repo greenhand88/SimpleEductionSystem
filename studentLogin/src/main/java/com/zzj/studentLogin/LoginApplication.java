@@ -6,11 +6,17 @@ import com.zzj.studentLogin.VO.TokenPermission;
 import com.zzj.studentLogin.entity.StudentAccount;
 import com.zzj.studentLogin.service.StudentAccountService;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.amqp.rabbit.annotation.RabbitHandler;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.lang.Nullable;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
@@ -65,7 +71,10 @@ public class LoginApplication {
             return new Result("", "404", false, "连接断开,密码修改失败!");
         }
     }
-    @PostMapping("/getUid")
+    /**
+    *
+     */
+    @RabbitListener(queues ="${mq.config.uid.queue}")
     public String getUid(@RequestBody String account){
         return studentAccountService.getUid(account);
     }
@@ -110,6 +119,11 @@ public class LoginApplication {
         return studentAccountService.signOut(tokenPermission.getToken());
     }
 
+    @GetMapping("/notification")
+    @RabbitListener(queues="${mq.config.notification.exchange}")
+    public String obtainNotification(String notification){
+        return notification;
+    }
     public static void main(String[] args) {
         SpringApplication.run(LoginApplication.class, args);
     }
