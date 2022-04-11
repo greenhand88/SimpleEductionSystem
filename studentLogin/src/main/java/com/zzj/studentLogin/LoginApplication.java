@@ -6,6 +6,7 @@ import com.zzj.studentLogin.VO.TokenPermission;
 import com.zzj.studentLogin.entity.StudentAccount;
 import com.zzj.studentLogin.service.StudentAccountService;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,13 +72,8 @@ public class LoginApplication {
             return new Result("", "404", false, "连接断开,密码修改失败!");
         }
     }
-    /**
-    *
-     */
-    @RabbitListener(queues ="${mq.config.uid.queue}")
-    public String getUid(@RequestBody String account){
-        return studentAccountService.getUid(account);
-    }
+
+
 
     /**
      * @param tokenPermission
@@ -118,12 +114,27 @@ public class LoginApplication {
     public Result signOut(@RequestBody TokenPermission tokenPermission) {
         return studentAccountService.signOut(tokenPermission.getToken());
     }
+    /**
+     *
+     * @param account
+     */
+    @PostMapping("/getUid")
+    public String getUid(@RequestBody String account){
+        return studentAccountService.getUid(account);
+    }
 
+    //Below Code Need MQ
+
+    /**
+     *
+     * @return
+     */
     @GetMapping("/notification")
-    @RabbitListener(queues="${mq.config.notification.exchange}")
-    public String obtainNotification(String notification){
+    public String obtainNotification(){
+        String notification=studentAccountService.getNotification();
         return notification;
     }
+
     public static void main(String[] args) {
         SpringApplication.run(LoginApplication.class, args);
     }

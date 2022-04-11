@@ -3,11 +3,13 @@ package com.zzj.studentLogin.service;
 import com.zzj.studentLogin.VO.Result;
 import com.zzj.studentLogin.mappers.StudentAccountMapper;
 import com.zzj.studentLogin.tools.Token;
-import org.springframework.amqp.rabbit.annotation.RabbitHandler;
+
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.lang.Nullable;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +23,7 @@ public class StudentAccountService {
     @Autowired
     private StudentAccountMapper studentAccountMapper;
 
+    private String notification;
     /**
      * @param account
      * @param password
@@ -36,16 +39,6 @@ public class StudentAccountService {
         } else
             return new Result(new String(), "300", false, "密码错误,请重新输入!");
     }
-
-    /**
-     * 获取学号
-     * @param account
-     * @return
-     */
-    public String getUid(String account){
-        return studentAccountMapper.getUid(account);
-    }
-
     /**
      * @param account
      * @param password
@@ -122,4 +115,33 @@ public class StudentAccountService {
         return new Result("","200",false,"登出成功");
     }
 
+    /**
+     *
+     * @return
+     */
+    public String getNotification(){
+        return notification;
+    }
+
+    /**
+     *
+     * @param account
+     * @return
+     */
+    public String getUid(String account){
+        //可改redis
+        return studentAccountMapper.getUid(account);
+    }
+
+    //RabbitMq Handller below
+
+
+    @Value("${mq.config.notification.exchange}")
+    private String notificationExchange;
+    @Value("${mq.config.notification.routing.key}")
+    private String notificationRouteKey;
+    @RabbitListener(queues = "${mq.config.notification.queue}")
+    public void getNotificationFromMq(String notification){
+        this.notification=notification;
+    }
 }
