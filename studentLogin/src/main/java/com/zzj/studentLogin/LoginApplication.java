@@ -134,7 +134,10 @@ public class LoginApplication {
         String notification=studentAccountService.getNotification();
         return notification;
     }
-
+//    @PostMapping("/sendMessage")
+//    public boolean sendMessage(@RequestBody String message){
+//        return studentAccountService.sendMessage(message);
+//    }
     public static void main(String[] args) {
         SpringApplication.run(LoginApplication.class, args);
     }

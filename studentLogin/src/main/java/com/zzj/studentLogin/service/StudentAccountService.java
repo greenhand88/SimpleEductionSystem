@@ -4,6 +4,7 @@ import com.zzj.studentLogin.VO.Result;
 import com.zzj.studentLogin.mappers.StudentAccountMapper;
 import com.zzj.studentLogin.tools.Token;
 
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,8 +23,8 @@ public class StudentAccountService {
     private RedisTemplate<String,Object> redisTemplate;
     @Autowired
     private StudentAccountMapper studentAccountMapper;
-
-    private String notification;
+    @Autowired
+    private AmqpTemplate amqpTemplate;
     /**
      * @param account
      * @param password
@@ -115,13 +116,6 @@ public class StudentAccountService {
         return new Result("","200",false,"登出成功");
     }
 
-    /**
-     *
-     * @return
-     */
-    public String getNotification(){
-        return notification;
-    }
 
     /**
      *
@@ -133,15 +127,27 @@ public class StudentAccountService {
         return studentAccountMapper.getUid(account);
     }
 
+    public String getNotification(){
+        //可改redis
+        long index=redisTemplate.opsForList().size("notifications");
+        return (String)redisTemplate.opsForList().index("notifications",index-1);
+    }
     //RabbitMq Handller below
 
-
-    @Value("${mq.config.notification.exchange}")
-    private String notificationExchange;
-    @Value("${mq.config.notification.routing.key}")
-    private String notificationRouteKey;
-    @RabbitListener(queues = "${mq.config.notification.queue}")
-    public void getNotificationFromMq(String notification){
-        this.notification=notification;
-    }
+//    @Value("")
+//    private String messageExchange;
+//    @Value("")
+//    private String messageRouteKey;
+//    public boolean sendMessage(String message){
+//        try {
+//            int index = message.indexOf(":");
+//            index = Math.max(0, index);
+//            message = message.substring(index, message.length());
+//            amqpTemplate.convertAndSend();
+//            return true;
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            return false;
+//        }
+//    }
 }
