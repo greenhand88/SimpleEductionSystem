@@ -5,11 +5,11 @@
     <packaging>pom</packaging>
     <modules>
         <module>eureka</module>
-        <module>studentLogin</module>
+        <module>student</module>
         <module>homework</module>
         <module>gateway</module>
         <module>teacher</module>
-        <module>notification</module>
+        <module>login</module>
     </modules>
 
     <parent>
