@@ -25,13 +25,14 @@ public interface AccountMapper {
         public String getUid(String account);
 
         /**
-         * register
          *
          * @param account
          * @param password
+         * @param isT
+         * @param uid
          */
-        @Insert("insert into student(uid,name,account,password) values(#{uid},#{name},#{account},#{password})")
-        public void register(String account, String password, String uid,String name);
+        @Insert("insert into account(account,password,isT,uid) values(#{account},#{password},#{isT},#{uid})")
+        public void register(String account, String password, int isT,String uid);
 
         /**
          * changePassword

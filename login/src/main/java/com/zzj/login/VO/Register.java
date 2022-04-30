@@ -3,15 +3,14 @@ package com.zzj.login.VO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.io.Serializable;
-
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class Result implements Serializable {
-    String token;
+public class Register {
+    String account;
+    String password;
+    int isT;
     String uid;
-    Boolean isTeacher;
-    Boolean pass;
 }
