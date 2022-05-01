@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -46,9 +43,25 @@ public class LoginApplication {
     public Boolean register(@RequestBody Register register){
         return accountService.createAccount(register);
     }
+
+    /**
+     *
+     * @param token
+     * @return
+     */
     @PostMapping("/token")
     public Result loginByToken(@RequestBody String token){
         return accountService.loginByToken(token);
+    }
+
+    /**
+     *
+     * @param token
+     * @return
+     */
+    @PostMapping("/signOut")
+    public Boolean signOut(@RequestBody String token){
+        return accountService.signOut(token);
     }
     public static void main(String[] args) {
         SpringApplication.run(LoginApplication.class, args);
