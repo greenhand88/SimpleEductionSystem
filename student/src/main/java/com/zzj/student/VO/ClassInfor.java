@@ -4,9 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class TokenPermission {
-    String token;
+@NoArgsConstructor
+@Data
+public class ClassInfor {
+    String uid;
+    String cname;
+    String tid;
+    String tname;
 }

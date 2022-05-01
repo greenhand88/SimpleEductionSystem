@@ -1,8 +1,8 @@
 package com.zzj.student.mappers;
 
-import org.apache.ibatis.annotations.Insert;
+import com.zzj.student.VO.ClassInfor;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+
 import java.util.ArrayList;
 
 public interface ClassMapper {
@@ -20,7 +20,9 @@ public interface ClassMapper {
     @Select("select distinct cname from sclass where suid=#{suid}")
     public ArrayList<String>getMyClass(String suid);
 
-    @Insert("insert into sclass(uid,cname,suid,sname) values (#{uid},#{cname},#{suid},#{sname})")
-    public void addClass(String uid,String cname,String suid,String name);
+    @Select("select distinct sclass.uid,sclass.cname,tid,tname from sclass inner join tclass on sclass.uid=tclass.uid where suid=#{suid}")
+    public ArrayList<ClassInfor>getMyTeacher(String suid);
 
+    @Select("select content from homework where tid=#{tid}")
+    public ArrayList<String> getHomework(String tid);
 }

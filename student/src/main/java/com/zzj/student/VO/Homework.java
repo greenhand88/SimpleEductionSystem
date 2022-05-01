@@ -4,10 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+import java.util.ArrayList;
+
 @AllArgsConstructor
 @NoArgsConstructor
-public class Login {
-    String account;
-    String password;
+@Data
+public class Homework {
+    ClassInfor classInfor;
+    ArrayList<String> content;
 }
