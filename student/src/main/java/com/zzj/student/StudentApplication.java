@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
@@ -50,10 +51,17 @@ public class StudentApplication {
     public ArrayList<ClassInfor>getClassInfor(@RequestBody String token){
         return studentService.getMyClassInfor(token);
     }
+
+    /**
+     *
+     * @param token
+     * @return
+     */
     @PostMapping("/getHomeWork")
     public ArrayList<Homework>getHomeWork(@RequestBody String token){
         return studentService.getHomework(token);
     }
+
     public static void main(String[] args) {
         SpringApplication.run(StudentApplication.class, args);
     }

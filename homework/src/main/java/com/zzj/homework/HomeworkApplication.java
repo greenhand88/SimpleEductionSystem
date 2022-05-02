@@ -1,19 +1,16 @@
 package com.zzj.homework;
 
-import com.zzj.homework.service.UploadHW;
+import com.zzj.homework.service.HomeworkService;
+import com.zzj.homework.tools.UploadHW;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.ServletOutputStream;
 
 
 @EnableEurekaClient
@@ -22,10 +19,11 @@ import javax.servlet.ServletOutputStream;
 @MapperScan("com.zzj.homework.mappers")
 public class HomeworkApplication {
     @Autowired
-    UploadHW uploadHW;
-    @PostMapping("/upload")
-    public String upLoadFile(@RequestParam("file") MultipartFile file,@RequestParam("account") String account){
-        return uploadHW.saveFile(file,account);
+    HomeworkService homeworkService;
+
+    @PostMapping("/postHomeWork")
+    public boolean postHomeWork(@RequestParam("file") MultipartFile file, @RequestParam("sid") String sid,@RequestParam("cid") String cid){
+        return homeworkService.postHomework(file,sid,cid) ;
     }
     public static void main(String[] args) {
         SpringApplication.run(HomeworkApplication.class, args);

@@ -4,12 +4,13 @@ import com.zzj.student.VO.ClassInfor;
 import com.zzj.student.VO.Homework;
 import com.zzj.student.mappers.ClassMapper;
 
+import com.zzj.student.tools.ProcessJson;
 import org.springframework.amqp.core.AmqpTemplate;
-import org.springframework.amqp.rabbit.annotation.QueueBinding;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,10 @@ public class StudentService {
     private ClassMapper classMapper;
     @Autowired
     private AmqpTemplate amqpTemplate;
-
+    @Autowired
+    private RestTemplate restTemplate;
+    @Autowired
+    private LoadBalancerClient loadBalancerClient;
     /**
      *
      * @return
@@ -42,8 +46,7 @@ public class StudentService {
      */
     public ArrayList<String> getMyClass(String token){
         try {
-            int start=token.indexOf("\"",token.indexOf(":"))+1,end=token.indexOf("\"",start+1);
-            String s = token.substring(start, end);
+            String s = ProcessJson.processJson(token);
             s=redisTemplate.opsForHash().get(s,"uid").toString();
             return classMapper.getMyClass(s);
         }catch (Exception e){
@@ -59,8 +62,7 @@ public class StudentService {
      */
     public ArrayList<ClassInfor> getMyClassInfor(String token){
         try {
-            int start=token.indexOf("\"",token.indexOf(":"))+1,end=token.indexOf("\"",start+1);
-            String s = token.substring(start, end);
+            String s = ProcessJson.processJson(token);
             s=redisTemplate.opsForHash().get(s,"uid").toString();
             return classMapper.getMyTeacher(s);
         }catch (Exception e){
@@ -68,6 +70,12 @@ public class StudentService {
             return new ArrayList<ClassInfor>();
         }
     }
+
+    /**
+     *
+     * @param token
+     * @return
+     */
     public ArrayList<Homework> getHomework(String token){
         try{
             ArrayList<ClassInfor> list = getMyClassInfor(token);
@@ -82,4 +90,5 @@ public class StudentService {
             return new ArrayList<Homework>();
         }
     }
+
 }

@@ -1,10 +1,13 @@
-package com.zzj.homework.service;
+package com.zzj.homework.tools;
 
 import com.zzj.homework.tools.OpsForFilePath;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.amqp.rabbit.annotation.QueueBinding;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
@@ -13,11 +16,18 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Service
+@Component
 public class UploadHW {
     @Autowired
     OpsForFilePath opsForFilePath;
-    public String saveFile(MultipartFile file,String account) {
+
+    /**
+     *
+     * @param file
+     * @param cid
+     * @return
+     */
+    public String saveFile(MultipartFile file,String cid) {
         if (file.isEmpty()) {
             return "文件为空!";
         }
@@ -26,7 +36,7 @@ public class UploadHW {
                 .substring(file.getContentType().lastIndexOf("/") + 1);
         try {
             // 获取保存路径
-            String path = opsForFilePath.getSavePath(account);
+            String path = opsForFilePath.getSavePath(cid);
             File files = new File(path, fileName);
             File parentFile = files.getParentFile();
             if (!parentFile.exists()) {
@@ -38,4 +48,5 @@ public class UploadHW {
         }
         return fileName; // 返回重命名后的文件名
     }
+    //以下是监听器
 }
