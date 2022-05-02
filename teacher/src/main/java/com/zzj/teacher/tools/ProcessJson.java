@@ -1,4 +1,4 @@
-package com.zzj.student.tools;
+package com.zzj.teacher.tools;
 
 public class ProcessJson {
     public static String processJson(String token){

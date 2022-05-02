@@ -4,11 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+import java.io.Serializable;
+
 @AllArgsConstructor
 @NoArgsConstructor
-public class ChangePassword {
-    String account;
-    String oldPassword;
-    String newPassword;
+@Data
+public class TClassInfor implements Serializable {
+    String tid;
+    String cid;
+    String hid;
+    String content;
 }

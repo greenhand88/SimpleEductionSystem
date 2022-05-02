@@ -2,12 +2,12 @@ package com.zzj.teacher.VO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
+import lombok.NoArgsConstructor;
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
-public class Result {
+public class HInfor {
     String token;
-    String code;
-    boolean pass;
-    String message;
+    String cid;
+    String content;
 }

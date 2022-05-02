@@ -1,6 +1,8 @@
 package com.zzj.student;
 import com.zzj.student.VO.ClassInfor;
 import com.zzj.student.VO.Homework;
+import com.zzj.student.VO.Infor;
+import com.zzj.student.VO.RequestH;
 import com.zzj.student.service.StudentService;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +10,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @EnableSwagger2
 @SpringBootApplication
@@ -54,14 +56,17 @@ public class StudentApplication {
 
     /**
      *
-     * @param token
+     * @param requestH
      * @return
      */
     @PostMapping("/getHomeWork")
-    public ArrayList<Homework>getHomeWork(@RequestBody String token){
-        return studentService.getHomework(token);
+    public ArrayList<Homework>getHomeWork(@RequestBody RequestH requestH){
+        return studentService.getHomework(requestH.getToken(),requestH.getHid());
     }
-
+    @PostMapping("/getAllHInfor")
+    public ArrayList<ArrayList<Infor>> getAllHInfor(@RequestBody String token){
+        return studentService.getHInfor(token);
+    }
     public static void main(String[] args) {
         SpringApplication.run(StudentApplication.class, args);
     }

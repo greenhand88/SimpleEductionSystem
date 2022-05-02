@@ -11,5 +11,5 @@ import java.util.ArrayList;
 @Data
 public class Homework {
     ClassInfor classInfor;
-    ArrayList<String> content;
+    ArrayList<Infor> infors;
 }

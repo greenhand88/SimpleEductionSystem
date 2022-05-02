@@ -1,21 +1,19 @@
 package com.zzj.teacher.service;
 
-import com.zzj.teacher.mappers.AccountMapper;
+import com.zzj.teacher.mappers.TeacherMapper;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class NotificationService {
     @Autowired
     private AmqpTemplate amqpTemplate;
     @Autowired
-    private AccountMapper accountMapper;
+    private TeacherMapper teacherMapper;
     @Autowired
     private RedisTemplate<String,Object> redisTemplate;
     @Value("${mq.config.notification.exchange}")

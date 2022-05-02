@@ -2,6 +2,7 @@ package com.zzj.student.service;
 
 import com.zzj.student.VO.ClassInfor;
 import com.zzj.student.VO.Homework;
+import com.zzj.student.VO.Infor;
 import com.zzj.student.mappers.ClassMapper;
 
 import com.zzj.student.tools.ProcessJson;
@@ -74,15 +75,16 @@ public class StudentService {
     /**
      *
      * @param token
+     * @param hid
      * @return
      */
-    public ArrayList<Homework> getHomework(String token){
+    public ArrayList<Homework> getHomework(String token,String hid){
         try{
             ArrayList<ClassInfor> list = getMyClassInfor(token);
             ArrayList<Homework> result = new ArrayList<>();
             for (ClassInfor i : list) {
-                ArrayList<String>homework=classMapper.getHomework(i.getTid());
-                result.add(new Homework(i,homework));
+                ArrayList<Infor>infors=classMapper.getHomework(i.getTid());
+                result.add(new Homework(i,infors));
             }
             return result;
         }catch (Exception e){
@@ -90,5 +92,19 @@ public class StudentService {
             return new ArrayList<Homework>();
         }
     }
-
+    public ArrayList<ArrayList<Infor>> getHInfor(String token){
+        try{
+            token=ProcessJson.processJson(token);
+            ArrayList<ClassInfor> list = getMyClassInfor(token);
+            ArrayList<ArrayList<Infor>>result=new ArrayList<>();
+            for (ClassInfor i : list) {
+                ArrayList<Infor>infors=classMapper.getHomework(i.getTid());
+                result.add(infors);
+            }
+            return result;
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
 }
