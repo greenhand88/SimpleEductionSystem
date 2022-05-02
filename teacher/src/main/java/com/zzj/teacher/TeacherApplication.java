@@ -1,5 +1,6 @@
 package com.zzj.teacher;
 
+import com.zzj.teacher.VO.HCondition;
 import com.zzj.teacher.VO.HInfor;
 import com.zzj.teacher.VO.Infor;
 import com.zzj.teacher.service.TeacherService;
@@ -28,9 +29,25 @@ public class TeacherApplication {
     public boolean putHomework(@RequestBody HInfor hInfor){
         return teacherService.putHomework(hInfor.getToken(),hInfor.getCid(),hInfor.getContent());
     }
+
+    /**
+     *
+     * @param token
+     * @return
+     */
     @PostMapping("/getHomework")
     public ArrayList<Infor> getHomework(@RequestBody String token){
         return teacherService.getHomework(token);
+    }
+
+    /**
+     *
+     * @param token
+     * @return
+     */
+    @PostMapping("/getCondition")
+    public ArrayList<HCondition>getCondition(@RequestBody String token){
+        return teacherService.getStudentCondition(token);
     }
     public static void main(String[] args) {
         SpringApplication.run(TeacherApplication.class, args);
