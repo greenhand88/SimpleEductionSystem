@@ -1,5 +1,6 @@
 package com.zzj.teacher.service;
 
+import com.zzj.teacher.VO.Infor;
 import com.zzj.teacher.VO.TClassInfor;
 import com.zzj.teacher.mappers.TeacherMapper;
 import com.zzj.teacher.tools.ProcessJson;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 @Service
@@ -25,6 +27,14 @@ public class TeacherService {
     private AmqpTemplate amqpTemplate;
     @Value("${mq.config.homework.exchange}")
     String exchange;
+
+    /**
+     *
+     * @param token
+     * @param cid
+     * @param content
+     * @return
+     */
     public boolean putHomework(String token,String cid,String content){
         try{
             token= ProcessJson.processJson(token);
@@ -39,6 +49,23 @@ public class TeacherService {
         }catch (Exception e){
             e.printStackTrace();
             return false;
+        }
+    }
+
+    /**
+     *
+     * @param token
+     * @return
+     */
+    public ArrayList<Infor>getHomework(String token){
+        try{
+            token = ProcessJson.processJson(token);
+            if (!(boolean) redisTemplate.opsForHash().get(token, "isTeacher"))
+                return new ArrayList<>();
+            String tid = (String) redisTemplate.opsForHash().get(token, "uid");
+            return teacherMapper.getHomework(tid);
+        }catch (Exception e){
+            return new ArrayList<>();
         }
     }
     //下面是监听器
