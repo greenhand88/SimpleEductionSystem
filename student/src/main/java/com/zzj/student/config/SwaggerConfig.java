@@ -26,7 +26,7 @@ public class SwaggerConfig {
                 .apiInfo(apiInfo())
                 .host("http://localhost:18000")  // Base URL
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.zzj.studentLogin"))
+                .apis(RequestHandlerSelectors.basePackage("com.zzj"))
                 .paths(PathSelectors.any())
                 .build();
     }

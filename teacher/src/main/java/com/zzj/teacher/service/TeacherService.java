@@ -71,6 +71,12 @@ public class TeacherService {
             return new ArrayList<>();
         }
     }
+
+    /**
+     *
+     * @param token
+     * @return
+     */
     public ArrayList<HCondition>getStudentCondition(String token){
         try{
             token=ProcessJson.processJson(token);
