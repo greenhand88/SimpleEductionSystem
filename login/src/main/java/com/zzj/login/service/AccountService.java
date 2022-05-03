@@ -41,7 +41,7 @@ public class AccountService {
      */
     public Result pass(Login login){
         Id id=accountMapper.getInfor(login.getAccount());
-        if(id!=null&&id.getPassword().equals(login.getPassword())){
+        if(id!=null&&redisTemplate .opsForValue().get(id.getUid())==null&&id.getPassword().equals(login.getPassword())){
             String token= Token.getToken(login.getAccount());
             Result result=new Result(token,id.getUid(),id.getIsT()==1,true);
             amqpTemplate.convertAndSend(exchange,routeKey,result);
@@ -98,7 +98,8 @@ public class AccountService {
     public void sendToRedis(Result result){
         redisTemplate.opsForHash().put(result.getToken(),"uid",result.getUid());
         redisTemplate.opsForHash().put(result.getToken(),"isTeacher",result.getIsTeacher());
-        redisTemplate.expire(result.getToken(),30, TimeUnit.MINUTES);
+        redisTemplate.opsForValue().set(result.getUid(),1,3,TimeUnit.HOURS);
+        redisTemplate.expire(result.getToken(),3, TimeUnit.HOURS);
     }
     @RabbitListener(bindings = @QueueBinding(
             value = @Queue("${mq.config.signOut.queue}"),

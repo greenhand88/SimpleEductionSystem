@@ -92,6 +92,12 @@ public class StudentService {
             return new ArrayList<Homework>();
         }
     }
+
+    /**
+     *
+     * @param token
+     * @return
+     */
     public ArrayList<ArrayList<Infor>> getHInfor(String token){
         try{
             token=ProcessJson.processJson(token);
@@ -105,6 +111,21 @@ public class StudentService {
         }catch (Exception e){
             e.printStackTrace();
             return new ArrayList<>();
+        }
+    }
+
+    /**
+     *
+     * @param token
+     * @return
+     */
+    public String getName(String token){
+        try{
+            token = ProcessJson.processJson(token);
+            return classMapper.getName((String)redisTemplate.opsForHash().get(token, "uid"));
+        }catch (Exception e){
+            e.printStackTrace();
+            return new String();
         }
     }
 }

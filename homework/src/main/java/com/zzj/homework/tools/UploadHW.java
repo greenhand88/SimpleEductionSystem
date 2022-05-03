@@ -27,7 +27,7 @@ public class UploadHW {
      * @param cid
      * @return
      */
-    public String saveFile(MultipartFile file,String cid) {
+    public String saveFile(MultipartFile file,String hid) {
         if (file.isEmpty()) {
             return "文件为空!";
         }
@@ -36,7 +36,7 @@ public class UploadHW {
                 .substring(file.getContentType().lastIndexOf("/") + 1);
         try {
             // 获取保存路径
-            String path = opsForFilePath.getSavePath(cid);
+            String path = opsForFilePath.getSavePath(hid);
             File files = new File(path, fileName);
             File parentFile = files.getParentFile();
             if (!parentFile.exists()) {

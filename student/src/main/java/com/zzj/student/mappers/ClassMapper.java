@@ -27,4 +27,6 @@ public interface ClassMapper {
     @Select("select distinct hid,content from homework where tid=#{tid}")
     public ArrayList<Infor> getHomework(String tid);
 
+    @Select("select name from student where uid=#{sid}")
+    public String getName(String sid);
 }

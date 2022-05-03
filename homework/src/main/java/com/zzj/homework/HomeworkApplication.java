@@ -22,8 +22,8 @@ public class HomeworkApplication {
     HomeworkService homeworkService;
 
     @PostMapping("/postHomeWork")
-    public boolean postHomeWork(@RequestParam("file") MultipartFile file, @RequestParam("sid") String sid,@RequestParam("cid") String cid){
-        return homeworkService.postHomework(file,sid,cid) ;
+    public boolean postHomeWork(@RequestParam("file") MultipartFile file, @RequestParam("token") String token,@RequestParam("hid") String hid){
+        return homeworkService.postHomework(file,token,hid) ;
     }
     public static void main(String[] args) {
         SpringApplication.run(HomeworkApplication.class, args);

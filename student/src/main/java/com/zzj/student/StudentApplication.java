@@ -1,8 +1,5 @@
 package com.zzj.student;
-import com.zzj.student.VO.ClassInfor;
-import com.zzj.student.VO.Homework;
-import com.zzj.student.VO.Infor;
-import com.zzj.student.VO.RequestH;
+import com.zzj.student.VO.*;
 import com.zzj.student.service.StudentService;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +46,7 @@ public class StudentApplication {
      * @param token
      * @return
      */
-    @PostMapping("/getMyTeacher")
+    @PostMapping("/getClassInfor")
     public ArrayList<ClassInfor>getClassInfor(@RequestBody String token){
         return studentService.getMyClassInfor(token);
     }
@@ -63,9 +60,19 @@ public class StudentApplication {
     public ArrayList<Homework>getHomeWork(@RequestBody RequestH requestH){
         return studentService.getHomework(requestH.getToken(),requestH.getHid());
     }
+
+    /**
+     *
+     * @param token
+     * @return
+     */
     @PostMapping("/getAllHInfor")
     public ArrayList<ArrayList<Infor>> getAllHInfor(@RequestBody String token){
         return studentService.getHInfor(token);
+    }
+    @PostMapping("/getSName")
+    public Result getName(@RequestBody String token){
+        return new Result(studentService.getName(token));
     }
     public static void main(String[] args) {
         SpringApplication.run(StudentApplication.class, args);

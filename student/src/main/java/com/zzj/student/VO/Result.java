@@ -1,14 +1,12 @@
-package com.zzj.homework.VO;
+package com.zzj.student.VO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Mark implements Serializable {
-    String hid;
-    String sid;
+public class Result {
+    String name;
 }

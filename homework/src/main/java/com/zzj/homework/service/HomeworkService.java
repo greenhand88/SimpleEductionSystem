@@ -9,6 +9,7 @@ import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,19 +30,38 @@ public class HomeworkService {
     /**
      *
      * @param file
-     * @param sid
-     * @param cid
+     * @param token
+     * @param hid
      * @return
      */
-    public Boolean postHomework(MultipartFile file, String sid, String cid){
-        try{
-            uploadHW.saveFile(file,cid);
-            amqpTemplate.convertAndSend(mark,new Mark(cid,sid));
-            return true;
-        }catch (Exception e){
-            e.printStackTrace();
-            return false;
+    public Boolean postHomework(MultipartFile file, String token, String hid){
+        synchronized (redisTemplate) {
+            try{
+                changeRedisDB(1);
+                String sid = (String) redisTemplate.opsForHash().get(token, "uid");
+                uploadHW.saveFile(file, hid);
+                amqpTemplate.convertAndSend(mark, new Mark(hid, sid));
+                changeRedisDB(2);
+                return true;
+            }catch(Exception e){
+                e.printStackTrace();
+                return false;
+            }
         }
+    }
+    /**
+     *
+     * @param index
+     */
+    private synchronized void changeRedisDB(int index){
+        LettuceConnectionFactory connectionFactory = (LettuceConnectionFactory) redisTemplate.getConnectionFactory();
+        //切换到指定的数据上
+        connectionFactory.setDatabase(index);
+        redisTemplate.setConnectionFactory(connectionFactory);
+        //刷新配置
+        connectionFactory.afterPropertiesSet();
+        //重置连接
+        connectionFactory.resetConnection();
     }
     //监听器
     @RabbitListener(bindings = @QueueBinding(
@@ -49,6 +69,6 @@ public class HomeworkService {
             exchange = @Exchange("${mq.config.mark.exchange}")
     ))
     void sendToRedis(Mark mark){
-        redisTemplate.opsForList().rightPush(mark.getCid(),mark.getSid());
+        redisTemplate.opsForList().rightPush(mark.getHid(),mark.getSid());
     }
 }

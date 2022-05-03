@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class ClassInfor {
-    String uid;
+    String cid;
     String cname;
     String tid;
     String tname;
