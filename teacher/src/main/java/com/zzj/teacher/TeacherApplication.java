@@ -1,8 +1,6 @@
 package com.zzj.teacher;
 
-import com.zzj.teacher.VO.HCondition;
-import com.zzj.teacher.VO.HInfor;
-import com.zzj.teacher.VO.Infor;
+import com.zzj.teacher.VO.*;
 import com.zzj.teacher.service.TeacherService;
 import com.zzj.teacher.service.NotificationService;
 import org.mybatis.spring.annotation.MapperScan;
@@ -48,6 +46,20 @@ public class TeacherApplication {
     @PostMapping("/getCondition")
     public ArrayList<HCondition>getCondition(@RequestBody String token){
         return teacherService.getStudentCondition(token);
+    }
+    @PostMapping("/getName")
+    public Teacher getName(@RequestBody String token){
+        return new Teacher(teacherService.getName(token));
+    }
+
+    /**
+     *
+     * @param token
+     * @return
+     */
+    @PostMapping("/getClassInfor")
+    public ArrayList<ClassInfor>getClassInfor(@RequestBody String token){
+        return teacherService.getClassInfor(token);
     }
     public static void main(String[] args) {
         SpringApplication.run(TeacherApplication.class, args);

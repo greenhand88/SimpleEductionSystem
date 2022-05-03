@@ -1,5 +1,6 @@
 package com.zzj.teacher.service;
 
+import com.zzj.teacher.VO.ClassInfor;
 import com.zzj.teacher.VO.HCondition;
 import com.zzj.teacher.VO.Infor;
 import com.zzj.teacher.VO.TClassInfor;
@@ -30,6 +31,10 @@ public class TeacherService {
     private AmqpTemplate amqpTemplate;
     @Value("${mq.config.homework.exchange}")
     String exchange;
+    public String getName(String token){
+        token=ProcessJson.processJson(token);
+        return teacherMapper.getName((String)redisTemplate.opsForHash().get(token, "uid"));
+    }
 
     /**
      *
@@ -95,6 +100,10 @@ public class TeacherService {
             e.printStackTrace();
             return new ArrayList<>();
         }
+    }
+    public ArrayList<ClassInfor>getClassInfor(String token){
+        token=ProcessJson.processJson(token);
+        return teacherMapper.getClassInfor((String)redisTemplate.opsForHash().get(token, "uid"));
     }
     /**
      *
