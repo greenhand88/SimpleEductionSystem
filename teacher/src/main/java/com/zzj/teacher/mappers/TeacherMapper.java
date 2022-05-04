@@ -17,4 +17,8 @@ public interface TeacherMapper {
     public String getName(String tid);
     @Select("select cid,cname from tclass where tid=#{tid}")
     public ArrayList<ClassInfor>getClassInfor(String tid );
+    @Select("select hid from homework where tid=#{tid} and hid=#{hid}")
+    public String getSpecialHInfor(String tid, String hid);
+    @Select("select sname from sclass where suid=#{sid}")
+    public String getSName(String sid);
 }

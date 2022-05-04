@@ -47,6 +47,10 @@ public class TeacherApplication {
     public ArrayList<HCondition>getCondition(@RequestBody String token){
         return teacherService.getStudentCondition(token);
     }
+    @PostMapping("/getSpecialCondition")
+    public ArrayList<Student>getSpecialCondition(@RequestBody RequestA token){
+        return teacherService.getSpecialCondition(token.getToken(),token.getHid());
+    }
     @PostMapping("/getName")
     public Teacher getName(@RequestBody String token){
         return new Teacher(teacherService.getName(token));

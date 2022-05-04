@@ -1,9 +1,6 @@
 package com.zzj.teacher.service;
 
-import com.zzj.teacher.VO.ClassInfor;
-import com.zzj.teacher.VO.HCondition;
-import com.zzj.teacher.VO.Infor;
-import com.zzj.teacher.VO.TClassInfor;
+import com.zzj.teacher.VO.*;
 import com.zzj.teacher.mappers.TeacherMapper;
 import com.zzj.teacher.tools.ProcessJson;
 import org.springframework.amqp.core.AmqpTemplate;
@@ -93,6 +90,33 @@ public class TeacherService {
             ArrayList<HCondition>conditions=new ArrayList<>();
             for(Infor i:homeworks){
                 conditions.add(new HCondition(i.getHid(),redisTemplate.opsForList().range(i.getHid(), 0, -1)));
+            }
+            changeRedisDB(1);
+            return conditions;
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    /**
+     *
+     * @param token
+     * @param hid
+     * @return
+     */
+    public ArrayList<Student>getSpecialCondition(String token,String hid){
+        try{
+            token=ProcessJson.processJson(token);
+            if (!(boolean) redisTemplate.opsForHash().get(token, "isTeacher"))
+                return new ArrayList<>();
+            String tid = (String) redisTemplate.opsForHash().get(token, "uid");
+            changeRedisDB(2);
+            String uid = teacherMapper.getSpecialHInfor(tid,hid);
+            List<Object> range = (ArrayList)redisTemplate.opsForList().range(uid, 0, -1);
+            ArrayList<Student>conditions=new ArrayList<>();
+            for(Object i:range){
+                conditions.add(new Student(String.valueOf(i),teacherMapper.getSName(String.valueOf(i))));
             }
             changeRedisDB(1);
             return conditions;
