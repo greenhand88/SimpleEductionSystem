@@ -12,6 +12,6 @@ public class OpsForFilePath {
         ApplicationHome applicationHome = new ApplicationHome(this.getClass());
         // 保存目录位置根据项目需求可随意更改
         return applicationHome.getDir().getParentFile()
-                .getParentFile().getAbsolutePath() + "\\src\\main\\resources\\"+cid+"\\";
+                .getParentFile().getAbsolutePath() +cid+"\\";
     }
 }

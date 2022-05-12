@@ -13,8 +13,11 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
-#token断言
+      defaultZone: http://120.24.227.178:8761/eureka/
+  instance:
+    instance-id: gateway
+    prefer-ip-address: true
+
 
 
 
