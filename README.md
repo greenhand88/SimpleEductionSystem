@@ -8,6 +8,6 @@ http://120.24.227.178:8760/swagger-ui.html
 #teacher swagger-ui
 http://120.24.227.178:8763/swagger-ui.html
 
-#Due to service memory limit,I can only run 5 services and front projetc at the same time,so the homework moudle is not working;
+#Due to service memory limit,I can only run 5 services and front project at the same time,so the homework moudle is not working;
 You can visit here:
 http://120.24.227.178:7878/
